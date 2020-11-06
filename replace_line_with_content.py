@@ -1,9 +1,8 @@
 """
 this script recieves 4 arguments: 
     F the file to be changed,
-    CONTENT the content of the line that must be changed
-    NEW_CONTENT the content to replace the line that has CONTENT
-    COMMENT_TAG the comment symbol to ignore     
+    LINE_PREFIX the prefix of the line that must be changed
+    NEW_LINE the line to replace the line that has LINE_PREFIX as prefix    
 
 you can use this to add line to a file or change a line that is already there
 """
@@ -11,24 +10,23 @@ you can use this to add line to a file or change a line that is already there
 import sys
 
 FILE = sys.argv[1]
-CONTENT = sys.argv[2]
-NEW_CONTENT = sys.argv[3]
-COMMENT_TAG = sys.argv[4]
+LINE_PREFIX = sys.argv[2]
+NEW_LINE = sys.argv[3]
 
 file_obj = open(FILE, 'r')
 lines = file_obj.read().split('\n')
 file_obj.close()
 
-#find content and replace it
+#find LINE and replace it
 found = False
 for i in range(len(lines)):
-    if CONTENT in lines[i] and not lines[i].startswith(COMMENT_TAG):
-        lines[i] = NEW_CONTENT
+    if lines[i].startswith(LINE_PREFIX):
+        lines[i] = NEW_LINE
         found = True
         break
 
 if not found:
-    lines.append(NEW_CONTENT)
+    lines.append(NEW_LINE)
 
 #rewrite file
 text = '\n'.join(lines)
