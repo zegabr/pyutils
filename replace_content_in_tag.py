@@ -68,11 +68,10 @@ new_file_with_new_lines.append(TAG)
 
 final_text = ''
 for line in new_file_with_new_lines:
-	if line != '\n' and line != '':
-		final_text   += line + "\n"
+	final_text   += line + "\n"
 
 #write in file
 final_file = open(FILE,'w')
-final_file.write(final_text ) 
+final_file.write(final_text) 
 final_file.close()
 
